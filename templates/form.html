@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+    <html>
+        <head>
+            <title>First Web Server - Super Sprinter 3000</title>
+        </head>
+        <body>
+            <form action="/story" method="POST">
+                <h1>User Story manager - Add new Story</h1>
+            <p>Story Title<br>
+                <textarea rows="4" cols="60" name="story_title" required></textarea></p>
+
+            <p>User Story<br>
+                <textarea rows="4" cols="60" name="user_title" required></textarea></p>
+
+            <p>Acceptance Criteria<br>
+                <textarea rows="4" cols="60" name="acceptance_criteria" required></textarea></p>
+
+            <p>Business Value<br>
+                <input type="number" name="business_value" min="100" max="1500" step="100" required></p>
+
+            <p>Estimation (h)<br>
+                <input type="number" name="estimation_h" min="0.5" max="40" step="0.5" required></p>
+            
+            <p>Status<br>
+                <select name="status"></p>
+                    <option>Planning</option>
+                    <option>TODO</option>
+                    <option>In Progress</option>
+                    <option>Review</option>
+                    <option>Done</option>
+                </select>
+            <p><input type= "submit" name="create"></p>
+            </form>
+        </body>
+    </html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+    <html>
+        <head>
+            <title>Super Sprinter 3000</title>
+        </head>
+        <body>
+            <h1>User Story Manager</h1>
+            <form action="/story" method="GET">
+                <input id="create_story" type="submit" value="Create Story" class="button" href="/story">
+            </form>
+            <table>
+                <tr>
+                    {% for item in form_table_headers %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% for row in stories %}
+                    <tr>
+                        {% for story in row %}
+                            <td>{{ story }}</td>
+                        {% endfor %}
+                            <td align="middle">
+                                <form action="/story/{{ row[0] }}" method="POST">
+                                    <input id="edit_button" name="edit_button" type="image" alt="submit" value="{{ row[0] }}" width="30" src="/static/edit.png">
+                                </form>
+                            </td>
+                            <td align="middle">
+                                <form action="/story_delete" method="POST">
+                                    <input id="delete_button" name="delete_button" type="image" alt="submit" value="{{ row[0] }}" width="30" src="/static/delete.png">
+                                </form>
+                            </td>
+                {% endfor %}
+                    </tr>
+            </table>
+        </body>
+    </html>
