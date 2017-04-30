@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
     <html>
+        {% if not id_of_story %}
         <head>
             <title>First Web Server - Super Sprinter 3000</title>
         </head>
@@ -33,4 +34,38 @@
             <p><input type= "submit" name="create"></p>
             </form>
         </body>
+        {% else %}
+        <head>
+            <title>First Web Server - Super Sprinter 3000</title>
+        </head>
+        <body>
+            <form action="/edit" method="POST">
+                <h1>User Story manager - Add new Story</h1>
+            <p>Story Title<br>
+                <textarea rows="4" cols="60" name="edited_story_title">{{ edited_story[1] }}</textarea></p>
+
+            <p>User Story<br>
+                <textarea rows="4" cols="60" name="edited_user_title">{{ edited_story[2] }}</textarea></p>
+
+            <p>Acceptance Criteria<br>
+                <textarea rows="4" cols="60" name="edited_acceptance_criteria">{{ edited_story[3] }}</textarea></p>
+
+            <p>Business Value<br>
+                <input type="number" name="edited_business_value" min="100" max="1500" step="100" value="{{ edited_story[4] }}"></p>
+
+            <p>Estimation (h)<br>
+                <input type="number" name="edited_estimation_h" min="0.5" max="40" step="0.5" value="{{ edited_story[5] }}"></p>
+            
+            <p>Status<br>
+                <select name="edited_status"></p>
+                    <option selected hidden>{{ edited_story[6] }}</option>
+                    <option selected hidden>{{ edited_story[6] }}</option>
+                    <option selected hidden>{{ edited_story[6] }}</option>
+                    <option selected hidden>{{ edited_story[6] }}</option>
+                    <option selected hidden>{{ edited_story[6] }}</option>
+                </select>
+            <p><button type= "submit" name="edit" value="{{ edited_story[0] }}">Edit</button></p>
+            </form>
+        </body>
+        {% endif %}
     </html>

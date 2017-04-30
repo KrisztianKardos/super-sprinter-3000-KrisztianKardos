@@ -60,14 +60,43 @@ def delete_story():
 
 @app.route("/story/<id_of_story>", methods=["POST"])
 def edit_story(id_of_story=None):
+    '''
+        Fills in the data from the database when clicked on the edit button
+    '''
     stories = open_from_database()
     id_of_story = request.form["edit_button"]
     edited_story = []
     for editstory in stories:
         if editstory[0] == id_of_story:
-            for item_in_row in edited_story:
+            for item_in_row in editstory:
                 edited_story.append(item_in_row)
     return render_template("form.html", id_of_story=id_of_story, edited_story=edited_story)
+
+
+@app.route("/edit", methods=["POST"])
+def update_story():
+    '''
+        Fills in the data to the database from the edit page
+    '''
+    stories = open_from_database()
+    id_of_story = request.form["edit"]
+    for story in stories:
+        if story[0] == id_of_story:
+            stories.remove(story)
+    edited_story = [id_of_story]
+    form_elements = [
+                    "edited_story_title",
+                    "edited_user_title",
+                    "edited_acceptance_criteria",
+                    "edited_business_value",
+                    "edited_estimation_h",
+                    "edited_status"
+                    ]
+    for element in form_elements:
+        edited_story.append(request.form[element])
+    stories.append(edited_story)
+    write_to_database(stories)
+    return redirect(url_for("list_handler"))
 
 
 if __name__ == '__main__':
