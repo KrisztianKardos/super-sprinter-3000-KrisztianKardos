@@ -46,9 +46,28 @@ def list_handler():
                         ]
     return render_template("list.html", stories=stories, form_table_headers=form_table_headers)
 
-'''
-@app.route("/delete_story", methods=["POST"]):
-'''
+
+@app.route("/story_delete", methods=["POST"])
+def delete_story():
+    stories = open_from_database()
+    id_of_story = request.form["delete_button"]
+    for story in stories:
+        if story[0] == id_of_story:
+            stories.remove(story)
+    write_to_database(stories)
+    return redirect(url_for("list_handler"))
+
+
+@app.route("/story/<id_of_story>", methods=["POST"])
+def edit_story(id_of_story=None):
+    stories = open_from_database()
+    id_of_story = request.form["edit_button"]
+    edited_story = []
+    for editstory in stories:
+        if editstory[0] == id_of_story:
+            for item_in_row in edited_story:
+                edited_story.append(item_in_row)
+    return render_template("form.html", id_of_story=id_of_story, edited_story=edited_story)
 
 
 if __name__ == '__main__':
