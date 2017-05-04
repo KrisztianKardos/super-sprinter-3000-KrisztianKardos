@@ -58,7 +58,7 @@ def delete_story():
     return redirect(url_for("list_handler"))
 
 
-@app.route("/story/<id_of_story>", methods=["POST"])
+@app.route("/story/<id_of_story>", methods=["GET"])
 def edit_story(id_of_story=None):
     '''
         Fills in the data from the database when clicked on the edit button
